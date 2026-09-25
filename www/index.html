@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="id" dir="ltr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AI Prayer Reminder">
+  <title>AI Prayer Reminder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="welcome" class="welcome" aria-labelledby="welcomeTitle">
+    <div class="welcome-card"><div id="welcomeIcon" class="welcome-icon">☀️</div>
+      <p class="eyebrow">AI Prayer Reminder</p><h1 id="welcomeTitle">Selamat Pagi</h1>
+      <p id="welcomeSubtitle"></p><p id="welcomeDate" class="muted"></p>
+      <button id="startButton" class="primary" type="button">Mulai</button>
+      <button id="skipButton" class="link-button" type="button">Lewati</button>
+    </div>
+  </section>
+  <div id="app" class="app hidden">
+    <header class="topbar"><div class="brand"><span class="logo">☪</span><div><small>AI PRAYER REMINDER</small><h2 data-i18n="dashboard">Dasbor</h2></div></div>
+      <div class="actions"><button id="languageButton" class="icon" aria-label="Change language">🌐</button><button id="themeButton" class="icon" aria-label="Change theme">◐</button></div>
+    </header>
+    <main class="grid">
+      <section class="card location"><div class="card-title"><div><span class="eyebrow" data-i18n="location">Lokasi</span><h3 id="locationName">Menunggu lokasi...</h3></div><button id="locateButton" class="primary small" data-i18n="updateLocation">Perbarui Lokasi</button></div>
+        <div class="stats"><span>Lat<strong id="lat">-</strong></span><span>Long<strong id="lon">-</strong></span><span data-i18n="timezone">Zona Waktu<strong id="timezone">-</strong></span></div></section>
+      <section class="card clock"><span class="eyebrow" data-i18n="currentTime">Waktu Saat Ini</span><strong id="clock">--:--:--</strong><span id="date" class="muted"></span></section>
+      <section class="card next"><span class="eyebrow" data-i18n="nextPrayer">Sholat Berikutnya</span><div class="next-row"><div><h3 id="nextName">-</h3><strong id="nextTime">--:--</strong></div><div><span class="muted" data-i18n="timeRemaining">Waktu Tersisa</span><strong id="countdown">--:--:--</strong></div></div></section>
+      <section class="card schedule"><div class="card-title"><h3 data-i18n="prayerSchedule">Jadwal Sholat Hari Ini</h3><span id="apiStatus" class="status">● Offline</span></div><div id="scheduleList"></div><p id="cacheInfo" class="muted"></p></section>
+      <section class="card settings"><h3 data-i18n="settings">Pengaturan</h3><label><span data-i18n="calculationMethod">Metode Perhitungan</span><select id="method"><option value="AUTO">Otomatis</option><option value="20">Kementerian Agama Republik Indonesia</option><option value="3">Muslim World League</option><option value="5">Egyptian General Authority of Survey</option><option value="4">Umm Al-Qura University, Makkah</option><option value="1">University of Islamic Sciences, Karachi</option><option value="16">Dubai</option><option value="15">Moonsighting Committee</option></select></label><label><span data-i18n="theme">Tema</span><select id="theme"><option value="system">Ikuti Sistem</option><option value="light">Mode Terang</option><option value="dark">Mode Gelap</option></select></label><label><span data-i18n="language">Bahasa</span><select id="language"><option value="id">Bahasa Indonesia</option><option value="en">English</option><option value="ar">العربية</option></select></label><label class="check"><span data-i18n="welcomeSetting">Tampilkan welcome screen</span><input id="showWelcome" type="checkbox"></label></section>
+      <section class="card ai"><h3 data-i18n="aiStatus">Status AI</h3><p id="modelStatus">Model belum dimuat.</p><p class="muted">Kamera hanya diaktifkan ketika mode pendamping dimulai.</p><button id="testCompanion" class="secondary" data-i18n="companion">Mode Pendamping</button></section>
+    </main>
+  </div>
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true"><div class="modal-card"><h2 id="modalName">Waktu Sholat</h2><p data-i18n="prayerArrived">Waktu sholat telah tiba.</p><button id="begin" class="primary" data-i18n="start">Mulai</button><button id="closeModal" class="secondary" data-i18n="close">Tutup</button></div></div>
+  <div id="companion" class="modal hidden" role="dialog" aria-modal="true"><div class="companion"><div class="card-title"><h2 data-i18n="companion">Mode Pendamping</h2><strong id="lockTimer">05:00</strong></div><video id="video" autoplay muted playsinline></video><p id="cameraMessage" class="muted"></p><div class="movement"><span data-i18n="currentMovement">Gerakan saat ini</span><strong id="movement">-</strong><span id="confidence">0%</span><p id="reading"></p></div><button id="finish" class="primary" data-i18n="finish">Selesai</button></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script><script src="script.js"></script>
+</body></html>
